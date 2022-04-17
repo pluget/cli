@@ -5,6 +5,8 @@ export default async function help(command?: string) {
   console.info(" - add: Add a new plugin to package.json");
   console.info(" - init: Initialize a new mcli project");
   console.info(" - install: Install server and all plugins");
+  console.info(" - upgrade: Upgrade server and plugins");
+  console.info(" - search: Search for plugins");
   console.info(" - help: Show this help message");
   console.info("Run 'mcli help [command]' for more information on specific command");
 }
