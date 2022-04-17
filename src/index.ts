@@ -1,8 +1,9 @@
-import version from './components/promptVersion';
-import server from './components/promptServer';
+import minimist from 'minimist';
+var args = minimist(process.argv.slice(2));
 
-async function prompt() {
-  await server(await version());
-};
+import init from './commands/init';
+import help from './commands/help';
 
-prompt();
+if (args._.length !== 1) {
+  help();
+}

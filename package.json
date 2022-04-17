@@ -22,10 +22,12 @@
     "typescript": "^3.2.2"
   },
   "dependencies": {
+    "@types/minimist": "^1.2.2",
     "axios": "^0.26.1",
     "cheerio": "^1.0.0-rc.10",
     "edit-json-file": "^1.7.0",
     "minecraft-vers": "^0.4.0-2205",
+    "minimist": "^1.2.6",
     "prompts": "^2.4.2"
   }
 }
