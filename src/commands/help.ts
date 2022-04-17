@@ -6,4 +6,5 @@ export default async function help() {
   console.info(" - init: Initialize a new mcli project");
   console.info(" - install: Install server and all plugins");
   console.info(" - help: Show this help message");
+  console.info("Run 'mcli help [command]' for more information on specific command");
 }
