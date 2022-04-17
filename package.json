@@ -1,0 +1,31 @@
+{
+  "name": "mcli",
+  "version": "0.1.0",
+  "description": "Minecraft CLI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "ts-node src/index.ts",
+    "watch": "tsc --watch",
+    "lint": "tslint -c tslint.json -p tsconfig.json",
+    "clean": "rm -rf dist"
+  },
+  "repository": "git@github.com:mbledkowski/mcli.git",
+  "author": "Maciej Błędkowski <pub@mble.dk>",
+  "license": "GPL-3.0",
+  "private": false,
+  "devDependencies": {
+    "@types/node": "^8.0.29",
+    "@types/prompts": "^2.0.14",
+    "tslint": "^5.12.0",
+    "typescript": "^3.2.2"
+  },
+  "dependencies": {
+    "axios": "^0.26.1",
+    "cheerio": "^1.0.0-rc.10",
+    "edit-json-file": "^1.7.0",
+    "minecraft-vers": "^0.4.0-2205",
+    "prompts": "^2.4.2"
+  }
+}
