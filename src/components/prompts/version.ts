@@ -1,12 +1,13 @@
 import prompts from 'prompts';
-import versions from './availableVersions';
+import versions from '../versions';
 
-export default async function version() {
+export default async function promptVersion() {
+  const choices = await versions('release');
   const response = await prompts({
     type: 'autocomplete',
     name: 'value',
     message: 'Pick a version',
-    choices: versions,
+    choices,
     initial: 0
   })
   return response.value[0].name;

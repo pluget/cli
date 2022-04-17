@@ -1,6 +1,6 @@
-import paper from '../connections/apiPaperBuild';
-import spigot from '../connections/apiSpigotBuild';
-import vanilla from '../connections/apiVanillaBuild';
+import paper from '../../connections/apiPaperBuild';
+import spigot from '../../connections/apiSpigotBuild';
+import vanilla from '../../connections/apiVanillaBuild';
 import prompts from 'prompts';
 import { cwd } from 'process';
 
