@@ -1,4 +1,4 @@
-export default async function help() {
+export default async function help(command?: string) {
   console.info("Minecraft Command Line Interface (mcli)");
   console.info("Usage: mcli [command] [flags]");
   console.info("Commands:");
