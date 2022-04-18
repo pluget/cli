@@ -1,0 +1,10 @@
+Minecraft Command Line Interface (mcli)
+Usage: mcli [command] [flags]
+Commands:
+ - add: Add a new plugin to package.json
+ - init: Initialize a new mcli project
+ - install: Install server and all plugins
+ - upgrade: Upgrade server and plugins
+ - search: Search for plugins
+ - help: Show this help message
+Run 'mcli help [command]' for more information on specific command

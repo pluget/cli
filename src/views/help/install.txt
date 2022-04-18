@@ -1,0 +1,2 @@
+Minecraft Command Line Interface (mcli)
+Usage: mcli install [flags]
