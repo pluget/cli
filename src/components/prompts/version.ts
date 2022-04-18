@@ -10,5 +10,5 @@ export default async function promptVersion() {
     choices,
     initial: 0
   })
-  return response.value[0].name;
+  return response.value;
 };
