@@ -1,11 +1,11 @@
 import prompts from 'prompts';
 import { cwd } from 'process';
-import paper from '../../connections/apiPaperBuild';
-import spigot from '../../connections/apiSpigotBuild';
+import { getLatestBuild as paperGetLatestBuild} from '../../connections/papermc';
+import { getDownloadUrl as spigotGetDownloadUrl} from '../../connections/getbukkit';
 import { getDownloadUrl as vanillaGetDownloadUrl} from '../../connections/mojang';
 
 export default async function serverType(version: string) {
-  const [paperBuild, spigotDownload, vanillaDownload] = await Promise.all([paper(version), spigot(version), vanillaGetDownloadUrl(version)]);
+  const [paperBuild, spigotDownload, vanillaDownload] = await Promise.all([paperGetLatestBuild(version), spigotGetDownloadUrl(version), vanillaGetDownloadUrl(version)]);
   const selectedServer = await prompts({
     type: 'select',
     name: 'value',

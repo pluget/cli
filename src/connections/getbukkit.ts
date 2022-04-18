@@ -1,8 +1,10 @@
-import axios from 'axios';
-import { load } from 'cheerio';
-import { isText } from 'domhandler';
+// scraping; not official api
 
-async function getSpigotVersions() {
+import axios from "axios";
+import { load } from "cheerio";
+import { isText } from "domhandler";
+
+async function getSpigotVersionsWithDownloadUrlMap() {
   const versionListWithDownloadLinks = new Map();
   await axios.get(`https://getbukkit.org/download/spigot`)
     .then(res => {
@@ -33,14 +35,15 @@ async function getSpigotVersions() {
       }
     });
     return versionListWithDownloadLinks;
-}
+};
 
-export default async function getSpigotBuildDownloadLink(version: string) {
-  const versions = await getSpigotVersions();
-  const downloadLink = versions.get(version);
-  if (downloadLink === undefined) {
-    console.log("[Warning] Spigot: version not found");
+async function getDownloadUrl(version: string) {
+  const gotSpigotVersions = await getSpigotVersionsWithDownloadUrlMap();
+  const downloadUrl = gotSpigotVersions.get(version);
+  if (downloadUrl === undefined) {
     return null;
   }
-  return downloadLink
+  return downloadUrl;
 };
+
+export { getDownloadUrl };
