@@ -16,6 +16,7 @@
   "license": "GPL-3.0",
   "private": false,
   "devDependencies": {
+    "@types/fs-extra": "^9.0.13",
     "@types/minimist": "^1.2.2",
     "@types/node": "^8.0.29",
     "@types/prompts": "^2.0.14",
