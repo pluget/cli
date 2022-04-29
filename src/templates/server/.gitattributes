@@ -1,0 +1,2 @@
+/worlds filter=lfs diff=lfs merge=lfs -text
+/worlds/** filter=lfs diff=lfs merge=lfs -text
