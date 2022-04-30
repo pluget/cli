@@ -8,6 +8,10 @@ CLI tool for setting up and maintaining Minecraft servers.
   * Server files organized in folders
   * Version control with Git
 
+## Supported platforms
+
+  This package currently supports only UNIX and UNIX-like systems. Windows (DOS) platform is not supported, although adding support for it is planned.
+
 ## Installation
 
   * Install the CLI tool with `npm install -g mpmgg` or `yarn global add mpmgg`
