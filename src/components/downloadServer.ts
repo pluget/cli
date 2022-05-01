@@ -2,7 +2,7 @@ import { homedir } from 'os';
 import { resolve } from 'path';
 import fse from 'fs-extra';
 
-export default async function downloadServer(url: string){
+export default async function downloadServer(url: string, name: string){
   const cacheFolder = resolve(homedir(), './.config/mpm');
   const serverFolder = resolve(cacheFolder, './server');
   const ensureDirServerFolder = fse.ensureDir(serverFolder);
