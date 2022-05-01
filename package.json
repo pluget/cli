@@ -1,6 +1,6 @@
 {
   "name": "mpmgg",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Minecraft Package Manager",
   "main": "index.js",
   "scripts": {
