@@ -12,8 +12,12 @@ export default async function downloadServer(url: string, name: string){
   const [, response] = await Promise.all([ensureDirServerFolder, fetchUrl]);
   const file = await response.blob();
 
-  const filePath = resolve(serverFolder, './server.jar');
+  const filePath = resolve(serverFolder, `./${name}.jar`);
+  fse.access(filePath).then(() => {
+    fse.rm(filePath);
+  }).catch(() => {})
   const writeFile = fse.appendFile(filePath, Buffer.from(await file.arrayBuffer()));
 
   await writeFile;
+  return filePath;
 }

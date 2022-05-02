@@ -24,6 +24,5 @@ export default async function init(path: string): Promise<void> {
     }
   })
 
-  await server(await version());
-  await createServer(path, serverName.value);
+  await createServer(path, serverName.value, (await server(await version())).download || "");
 };

@@ -1,9 +1,10 @@
 import fs from 'fs';
 import fse from 'fs-extra';
 import { join, resolve } from 'path';
+import downloadServer from './downloadServer';
 import installServer from './installServer';
 
-export default async function createServer(path: string, projectName: string) {
+export default async function createServer(path: string, projectName: string, downloadPath: string) {
   const parentDir = resolve(process.cwd(), path)
   const dir = join(parentDir, projectName);
 
@@ -21,6 +22,8 @@ export default async function createServer(path: string, projectName: string) {
   ]);
 
   await fse.mkdir(dir);
+
+  await fse.copy(await downloadServer(downloadPath, "server"), resolve(dir, "./modules/server/server.jar"));
 
   await Promise.all([
     fse.copy(resolve(__dirname, '../templates/createServer'), dir),
