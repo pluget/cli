@@ -1,7 +1,7 @@
 import { readFile } from 'fs';
 import { join } from 'path';
 
-export default async function help(command?: string) {
+export default async function help(command?: string): Promise<void> {
   switch (command) {
     case 'init':
       readFile(join(__dirname, '/../views/help/init.txt'), 'utf8', (err, data) => {

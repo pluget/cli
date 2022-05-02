@@ -5,7 +5,7 @@ import version from '../components/prompts/version';
 import server from '../components/prompts/server';
 import createServer from '../components/createServer';
 
-export default async function init(path: string) {
+export default async function init(path: string): Promise<void> {
   const parentDir = resolve(process.cwd(), path)
 
   try {
@@ -14,15 +14,15 @@ export default async function init(path: string) {
     throw new Error(`The directory ${parentDir} does not exist.`);
   }
 
-  let serverName = await name();
+  const serverName = await name();
 
   const dir = join(parentDir, serverName.value);
 
-  try {
-    await fse.access(dir);
-    throw new Error(`Directory ${dir} already exists`);
-  } catch (err) {
-  }
+  fse.access(dir, (err) => {
+    if (!err) {
+      throw new Error(`Directory ${dir} already exists`);
+    }
+  })
 
   await server(await version());
   await createServer(path, serverName.value);

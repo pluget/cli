@@ -12,8 +12,7 @@ async function getSpigotVersionsWithDownloadUrlMap() {
       const $ = load(html);
       const versions = $("div.download-pane > div.row.vdivide > .col-sm-3 > h2");
       const versionList = new Array<string>();
-      let i = 0
-      for (let e of versions) {
+      for (const e of versions) {
         const child = e.children[0];
         if (isText(child)) {
           versionList.push(child.data);
