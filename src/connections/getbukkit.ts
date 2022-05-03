@@ -19,10 +19,10 @@ async function getVersionsWithDownloadUrlMap(serverType: string) {
         versionList.push(child.data);
       }
     }
-    for (let i = 0; i < versionList.length; i++) {
+    for (const item of versionList) {
       versionListWithDownloadLinks.set(
-        versionList[i],
-        `https://download.getbukkit.org/${serverType}/${serverType}-${versionList[i]}.jar`
+        item,
+        `https://download.getbukkit.org/${serverType}/${serverType}-${item}.jar`
       );
     }
   } catch (err) {
