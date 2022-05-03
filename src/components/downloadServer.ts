@@ -18,9 +18,7 @@ export default async function downloadServer(url: string, name: string) {
     .then(() => {
       fse.rm(filePath);
     })
-    .catch((err) => {
-      return null;
-    });
+    .catch(() => null);
   await fse.ensureFile(filePath);
   const writeFile = fse.appendFile(
     filePath,
