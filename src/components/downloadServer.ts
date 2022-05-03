@@ -1,10 +1,10 @@
-import { homedir } from 'os';
-import { resolve } from 'path';
-import fse from 'fs-extra';
+import { homedir } from "os";
+import { resolve } from "path";
+import fse from "fs-extra";
 
-export default async function downloadServer(url: string, name: string){
-  const cacheFolder = resolve(homedir(), './.config/mpm');
-  const serverFolder = resolve(cacheFolder, './server');
+export default async function downloadServer(url: string, name: string) {
+  const cacheFolder = resolve(homedir(), "./.cache/mpm");
+  const serverFolder = resolve(cacheFolder, "./server");
   const ensureDirServerFolder = fse.ensureDir(serverFolder);
 
   const fetchUrl = fetch(url);
@@ -13,10 +13,17 @@ export default async function downloadServer(url: string, name: string){
   const file = await response.blob();
 
   const filePath = resolve(serverFolder, `./${name}.jar`);
-  fse.access(filePath).then(() => {
-    fse.rm(filePath);
-  }).catch(() => {})
-  const writeFile = fse.appendFile(filePath, Buffer.from(await file.arrayBuffer()));
+  fse
+    .access(filePath)
+    .then(() => {
+      fse.rm(filePath);
+    })
+    .catch(() => {});
+  await fse.ensureFile(filePath);
+  const writeFile = fse.appendFile(
+    filePath,
+    Buffer.from(await file.arrayBuffer())
+  );
 
   await writeFile;
   return filePath;

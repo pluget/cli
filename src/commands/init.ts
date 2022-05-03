@@ -1,5 +1,5 @@
 import fse from 'fs-extra';
-import {join, resolve} from 'path';
+import { join, resolve } from 'path';
 import name from '../components/prompts/name';
 import version from '../components/prompts/version';
 import server from '../components/prompts/server';
@@ -24,5 +24,8 @@ export default async function init(path: string): Promise<void> {
     }
   })
 
-  await createServer(path, serverName.value, (await server(await version())).download || "");
+  const selectedVersion = await version()
+  const serverTypeAndDownload = await server(selectedVersion)
+
+  await createServer(path, serverName.value, serverTypeAndDownload.download || "", serverTypeAndDownload.val, selectedVersion);
 };
