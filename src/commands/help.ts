@@ -1,11 +1,11 @@
 import { readFile } from "fs";
-import { join } from "path";
+import { resolve } from "path";
 
 export default function help(command?: string): void {
   switch (command) {
     case "init":
       readFile(
-        join(__dirname, "/../views/help/init.txt"),
+        resolve(__dirname, "../../resources/views/help/init.txt"),
         "utf8",
         (err, data) => {
           if (err) {
@@ -18,7 +18,7 @@ export default function help(command?: string): void {
       break;
     case "add":
       readFile(
-        join(__dirname, "/../views/help/add.txt"),
+        resolve(__dirname, "../../resources/views/help/add.txt"),
         "utf8",
         (err, data) => {
           if (err) {
@@ -31,7 +31,7 @@ export default function help(command?: string): void {
       break;
     case "install":
       readFile(
-        join(__dirname, "/../views/help/install.txt"),
+        resolve(__dirname, "../../resources/views/help/install.txt"),
         "utf8",
         (err, data) => {
           if (err) {
@@ -44,7 +44,7 @@ export default function help(command?: string): void {
       break;
     case "upgrade":
       readFile(
-        join(__dirname, "/../views/help/upgrade.txt"),
+        resolve(__dirname, "../../resources/views/help/upgrade.txt"),
         "utf8",
         (err, data) => {
           if (err) {
@@ -57,7 +57,7 @@ export default function help(command?: string): void {
       break;
     case "search":
       readFile(
-        join(__dirname, "/../views/help/search.txt"),
+        resolve(__dirname, "../../resources/views/help/search.txt"),
         "utf8",
         (err, data) => {
           if (err) {
@@ -70,7 +70,7 @@ export default function help(command?: string): void {
       break;
     default:
       readFile(
-        join(__dirname, "/../views/help/index.txt"),
+        resolve(__dirname, "../../resources/views/help/index.txt"),
         "utf8",
         (err, data) => {
           if (err) {
