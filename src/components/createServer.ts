@@ -5,7 +5,7 @@ import createPackageJson from './createPackageJson';
 import downloadServer from './downloadServer';
 import installServer from './installServer';
 
-export default async function createServer(path: string, projectName: string, downloadPath: string, serverType: string, serverVersion: string) {
+export default async function createServer(path: string, projectName: string, downloadPath: string, serverVersionType: string, serverVersion: string) {
   const parentDir = resolve(process.cwd(), path)
   const dir = join(parentDir, projectName);
 
@@ -27,7 +27,7 @@ export default async function createServer(path: string, projectName: string, do
   await fse.copy(await downloadServer(downloadPath, "server"), resolve(dir, "./modules/server/server.jar"));
 
   await Promise.all([
-    createPackageJson(dir, projectName, "0.1.0", serverType, { name: serverType, version: serverVersion }),
+    createPackageJson(dir, projectName, "0.1.0", serverVersionType, { name: serverVersionType, version: serverVersion }),
     fse.copy(resolve(__dirname, '../templates/createServer'), dir),
     fse.ensureDir(resolve(dir, './logs/logs')),
     fse.ensureDir(resolve(dir, './plugins')),
