@@ -3,46 +3,50 @@
 import axios from "axios";
 import { load } from "cheerio";
 import { isText } from "domhandler";
+import log from "loglevel";
 
-async function getSpigotVersionsWithDownloadUrlMap() {
+async function getVersionsWithDownloadUrlMap(serverType: string) {
   const versionListWithDownloadLinks = new Map();
-  await axios.get(`https://getbukkit.org/download/spigot`)
-    .then(res => {
-      const html = res.data;
-      const $ = load(html);
-      const versions = $("div.download-pane > div.row.vdivide > .col-sm-3 > h2");
-      const versionList = new Array<string>();
-      for (const e of versions) {
-        const child = e.children[0];
-        if (isText(child)) {
-          versionList.push(child.data);
-        };
+  try {
+    const res = await axios.get(`https://getbukkit.org/download/${serverType}`);
+    const html = res.data;
+    const $ = load(html);
+    const versions = $("div.download-pane > div.row.vdivide > .col-sm-3 > h2");
+    const versionList = new Array<string>();
+    for (const e of versions) {
+      const child = e.children[0];
+      if (isText(child)) {
+        versionList.push(child.data);
       }
-      const downloadLinks = $("div.download-pane > div.row.vdivide > .col-sm-4 > .btn-group > a#downloadr");
-      if (downloadLinks.length !== versionList.length || downloadLinks.length === 0) {
-        throw new Error();
-      }
-      for (let i = 0; i < versionList.length; i++) {
-        versionListWithDownloadLinks.set(versionList[i], downloadLinks[i].attribs.href);
-      }
-    })
-    .catch(err => {
-      if (err.response) {
-        console.error("[Error] Spigot:", err.response.status, "wrong response from server");
-      } else {
-        console.error("[Error] Spigot: no response from server");
-      }
-    });
-    return versionListWithDownloadLinks;
-};
+    }
+    for (let i = 0; i < versionList.length; i++) {
+      versionListWithDownloadLinks.set(
+        versionList[i],
+        `https://download.getbukkit.org/${serverType}/${serverType}-${versionList[i]}.jar`
+      );
+    }
+  } catch (err) {
+    log.error(`GetBukkit.org: Problem with response from server. ${err}`);
+  }
+  return versionListWithDownloadLinks;
+}
 
-async function getDownloadUrl(version: string) {
-  const gotSpigotVersions = await getSpigotVersionsWithDownloadUrlMap();
+async function getSpigotDownloadUrl(version: string) {
+  const gotSpigotVersions = await getVersionsWithDownloadUrlMap("spigot");
   const downloadUrl = gotSpigotVersions.get(version);
   if (downloadUrl === undefined) {
     return null;
   }
   return downloadUrl;
-};
+}
 
-export { getDownloadUrl };
+async function getBukkitDownloadUrl(version: string) {
+  const gotBukkitVersions = await getVersionsWithDownloadUrlMap("craftbukkit");
+  const downloadUrl = gotBukkitVersions.get(version);
+  if (downloadUrl === undefined) {
+    return null;
+  }
+  return downloadUrl;
+}
+
+export { getSpigotDownloadUrl, getBukkitDownloadUrl };
