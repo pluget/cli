@@ -26,19 +26,16 @@ export default async function installServer(path: string) {
     dest: "./plugins",
     files: [],
   };
-  [
-    dirs["configDir"].files,
-    dirs["logsDir"].files,
-    dirs["worldsDir"].files,
-    dirs["modulesServerDir"].files,
-    dirs["modulesPluginsDir"].files,
-  ] = await Promise.all([
-    fse.readdir(resolve(path, "./config")),
-    fse.readdir(resolve(path, "./logs")),
-    fse.readdir(resolve(path, "./worlds")),
-    fse.readdir(resolve(path, "./modules/server")),
-    fse.readdir(resolve(path, "./modules/plugins")),
-  ]);
+
+  const readdirPromises = [] as Promise<void>[];
+
+  for (const dir in dirs) {
+    const promise = async () => {
+      dirs[dir].files = await fse.readdir(resolve(path, dirs[dir].path));
+    };
+    readdirPromises.push(promise());
+  }
+  await Promise.all(readdirPromises);
 
   const symlinkPromises = [] as Promise<void>[];
 
