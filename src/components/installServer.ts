@@ -47,7 +47,7 @@ export default async function installServer(path: string) {
       symlinkPromises.push(
         fse.symlink(
           join("..", dirs[dir].path, file),
-          resolve(path, "./bin", file)
+          resolve(path, dirs[dir].dest, file)
         )
       );
     }
