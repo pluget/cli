@@ -13,10 +13,10 @@ export default async function installServer(path: string) {
     };
   };
 
-  dirs["configDir"] = { path: "./config", dest: "./bin", files: [] };
-  dirs["logsDir"] = { path: "./logs", dest: "./bin", files: [] };
-  dirs["worldsDir"] = { path: "./worlds", dest: "./bin", files: [] };
-  dirs["modulesServerDir"] = {
+  dirs.configDir = { path: "./config", dest: "./bin", files: [] };
+  dirs.logsDir = { path: "./logs", dest: "./bin", files: [] };
+  dirs.worldsDir = { path: "./worlds", dest: "./bin", files: [] };
+  dirs.modulesServerDir = {
     path: "./modules/server",
     dest: "./bin",
     files: [],
