@@ -1,5 +1,5 @@
 import minimist from "minimist";
-var args = minimist(process.argv.slice(2));
+const args = minimist(process.argv.slice(2));
 
 import init from "./commands/init";
 import help from "./commands/help";
@@ -10,13 +10,13 @@ function catchedError(err: Error): void {
 }
 
 if (args._.length === 2 && args._[0] === "help") {
-  help(args._[1]).catch(catchedError);
+  help(args._[1]);
 } else {
   switch (args._[0]) {
     case "init":
       init(args._[1] || "").catch(catchedError);
       break;
     default:
-      help().catch(catchedError);
+      help();
   }
 }
