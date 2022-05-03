@@ -3,7 +3,7 @@ import { join, resolve } from "path";
 import downloadServer from "./downloadServer";
 
 export default async function installServer(path: string) {
-  await fse.copy(resolve(__dirname, "../templates/installServer"), path);
+  await fse.copy(resolve(__dirname, "../../resources/templates/installServer"), path);
 
   const dirs = {} as {
     [key: string]: {
@@ -19,11 +19,6 @@ export default async function installServer(path: string) {
   dirs["modulesServerDir"] = {
     path: "./modules/server",
     dest: "./bin",
-    files: [],
-  };
-  dirs["modulesPluginsDir"] = {
-    path: "./modules/plugins",
-    dest: "./plugins",
     files: [],
   };
 

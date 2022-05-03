@@ -68,7 +68,7 @@ export default async function createServer(
       name: serverVersionType,
       version: serverVersion,
     }),
-    fse.copy(resolve(__dirname, "../templates/createServer"), dir),
+    fse.copy(resolve(__dirname, "../../resources/templates/createServer"), dir),
     fse.ensureDir(resolve(dir, "./logs/logs")),
     fse.ensureDir(resolve(dir, "./plugins")),
     fse.ensureDir(resolve(dir, "./worlds/world")),
