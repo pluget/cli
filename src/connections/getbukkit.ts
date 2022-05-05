@@ -4,6 +4,8 @@ import axios from "axios";
 import { load } from "cheerio";
 import { isText } from "domhandler";
 import log from "loglevel";
+import createDebugMessages from "debug";
+const debug = createDebugMessages("scraper");
 
 async function getVersionsWithDownloadUrlMap(serverType: string) {
   const versionListWithDownloadLinks = new Map();
@@ -26,7 +28,8 @@ async function getVersionsWithDownloadUrlMap(serverType: string) {
       );
     }
   } catch (err) {
-    log.error(`GetBukkit.org: Problem with response from server. ${err}`);
+    log.error('GetBukkit.org: Problem with response from the server.');
+    debug(err);
   }
   return versionListWithDownloadLinks;
 }
