@@ -1,5 +1,6 @@
 import { readFile } from "fs";
 import { resolve } from "path";
+import log from 'loglevel';
 
 export default function help(command?: string): void {
   switch (command) {
@@ -9,10 +10,10 @@ export default function help(command?: string): void {
         "utf8",
         (err, data) => {
           if (err) {
-            console.error(err);
+            log.error(err);
             return;
           }
-          console.log(data);
+          log.log(data);
         }
       );
       break;
@@ -22,10 +23,10 @@ export default function help(command?: string): void {
         "utf8",
         (err, data) => {
           if (err) {
-            console.error(err);
+            log.error(err);
             return;
           }
-          console.log(data);
+          log.log(data);
         }
       );
       break;
@@ -35,10 +36,10 @@ export default function help(command?: string): void {
         "utf8",
         (err, data) => {
           if (err) {
-            console.error(err);
+            log.error(err);
             return;
           }
-          console.log(data);
+          log.log(data);
         }
       );
       break;
@@ -48,10 +49,10 @@ export default function help(command?: string): void {
         "utf8",
         (err, data) => {
           if (err) {
-            console.error(err);
+            log.error(err);
             return;
           }
-          console.log(data);
+          log.log(data);
         }
       );
       break;
@@ -61,10 +62,10 @@ export default function help(command?: string): void {
         "utf8",
         (err, data) => {
           if (err) {
-            console.error(err);
+            log.error(err);
             return;
           }
-          console.log(data);
+          log.log(data);
         }
       );
       break;
@@ -74,10 +75,10 @@ export default function help(command?: string): void {
         "utf8",
         (err, data) => {
           if (err) {
-            console.error(err);
+            log.error(err);
             return;
           }
-          console.log(data);
+          log.log(data);
         }
       );
   }

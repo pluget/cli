@@ -1,11 +1,12 @@
 import axios from 'axios';
+import log from 'loglevel';
 
 async function getVersions() {
   try {
     const response = await axios.get('https://launchermeta.mojang.com/mc/game/version_manifest_v2.json');
     return response.data;
   } catch (err) {
-    console.error(err);
+    log.error(err);
     return null;
   }
 }
@@ -16,7 +17,7 @@ async function getDownloadUrl(version: string) {
     const versions = response.data.versions;
     const versionData = versions.find((v: { id: string; }) => v.id === version);
     if (versionData === undefined || versionData.url === undefined) {
-      console.error(`Vanilla: Version ${version} not found`);
+      log.error(`Vanilla: Version ${version} not found`);
       return null;
     }
     const versionResponse = await axios.get(versionData.url);
@@ -26,7 +27,7 @@ async function getDownloadUrl(version: string) {
     const downloadLink = versionResponse.data.downloads.server.url;
     return downloadLink;
   } catch (err) {
-    console.error(err);
+    log.error(err);
     return null;
   }
 }
