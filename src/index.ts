@@ -7,7 +7,7 @@ import log from 'loglevel';
 import init from "./commands/init";
 import help from "./commands/help";
 
-function catchedError(err: Error): void {
+function caughtError(err: Error): void {
   log.error(err);
   process.exit(1);
 }
@@ -17,7 +17,7 @@ if (args._.length === 2 && args._[0] === "help") {
 } else {
   switch (args._[0]) {
     case "init":
-      init(args._[1] || "").catch(catchedError);
+      init(args._[1] || "").catch(caughtError);
       break;
     default:
       help();
