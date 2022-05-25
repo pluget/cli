@@ -11,6 +11,9 @@
     "lint": "tslint -c tslint.json -p tsconfig.json",
     "clean": "rm -rf dist"
   },
+  "files": [
+    "dist/index.js"
+  ],
   "bin": {
     "mpm": "./dist/index.js"
   },
