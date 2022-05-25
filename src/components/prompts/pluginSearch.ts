@@ -1,0 +1,22 @@
+import prompts from "prompts";
+import pluginsNames from "../../connections/pluginsNames";
+
+export default async function pluginSearch(pluginName?: string) {
+  const choices = await pluginsNames();
+  if (pluginName === undefined) {
+    const response = await prompts({
+      type: "autocomplete",
+      name: "value",
+      message: "What is the name of plugin that you want to add?",
+      choices,
+      initial: 420,
+    });
+    return response.value;
+  } else {
+    const plugin = choices.find((plugin) => plugin.title === pluginName);
+    if (plugin === undefined) {
+      throw new Error(`Plugin ${pluginName} not found`);
+    }
+    return plugin.value;
+  }
+}
