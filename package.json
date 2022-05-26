@@ -1,6 +1,6 @@
 {
   "name": "mpmgg",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Minecraft Package Manager",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,11 @@
     "clean": "rm -rf dist"
   },
   "files": [
-    "dist/index.js"
+    "dist/index.js",
+    "dist/commands/*.js",
+    "dist/components/*.js",
+    "dist/components/prompts/*.js",
+    "dist/connections/*.js"
   ],
   "bin": {
     "mpm": "dist/index.js"
