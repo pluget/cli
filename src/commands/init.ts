@@ -6,8 +6,10 @@ import name from "../components/prompts/name";
 import version from "../components/prompts/version";
 import server from "../components/prompts/server";
 import createServer from "../components/createServer";
+import versions from "../components/versions";
 
 export default async function init(path: string): Promise<void> {
+  const availableVersions = versions("release");
   const parentDir = resolve(process.cwd(), path);
 
   try {
@@ -22,11 +24,11 @@ export default async function init(path: string): Promise<void> {
 
   fse.access(dir, (err) => {
     if (!err) {
-      throw new Error(`Directory ${dir} already exists`);
+      throw new Error(`Directory ${dir} already exists.`);
     }
   });
 
-  const selectedVersion = await version();
+  const selectedVersion = await version(await availableVersions);
   debug(selectedVersion);
   const serverTypeAndDownload = await server(selectedVersion);
   debug(serverTypeAndDownload.val);

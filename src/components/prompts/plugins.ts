@@ -1,9 +1,9 @@
 import prompts from "prompts";
-import pluginsNames from "../../connections/pluginsNames";
+import pluginsNames from "../../connections/names";
 
 export default async function pluginSearch(pluginName?: string) {
   const choices = await pluginsNames();
-  if (pluginName === undefined) {
+  if (pluginName === "" || pluginName === undefined) {
     const response = await prompts({
       type: "autocomplete",
       name: "value",
