@@ -1,6 +1,6 @@
 {
   "name": "mpmgg",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Minecraft Package Manager",
   "main": "index.js",
   "scripts": {
@@ -12,10 +12,10 @@
     "clean": "rm -rf dist"
   },
   "files": [
-    "dist/index.js"
+    "dist/src/index.js"
   ],
   "bin": {
-    "mpm": "./dist/index.js"
+    "mpm": "./dist/src/index.js"
   },
   "repository": "git@github.com:mbledkowski/mcli.git",
   "author": "Maciej Błędkowski <pub@mble.dk>",
