@@ -4,6 +4,7 @@ import spigetVersionIdAndName from "../connections/spigetVersionIdAndName";
 import toSemVer from "../components/toSemVer";
 import promptVersion from "../components/prompts/version";
 import addDependencyToPackageJson from "../components/addDependencyToPackageJson";
+import installPlugin from "../components/installPlugin";
 const debug = createDebugMessages("choices");
 
 export default async function add(pluginNameAndVersion: string) {
@@ -22,4 +23,5 @@ export default async function add(pluginNameAndVersion: string) {
   debug(selectedVersion);
 
   addDependencyToPackageJson(pluginName, selectedVersion);
+  installPlugin(__dirname, pluginId, selectedVersion);
 }

@@ -43,6 +43,7 @@
     "cheerio": "^1.0.0-rc.10",
     "debug": "^4.3.4",
     "fs-extra": "^10.1.0",
+    "ipfs-core": "^0.14.3",
     "isomorphic-git": "^1.17.1",
     "jsonfile": "^6.1.0",
     "loglevel": "^1.8.0",

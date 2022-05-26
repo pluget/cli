@@ -1,4 +1,3 @@
-import fse from "fs-extra";
 import jsonfile from "jsonfile";
 import { resolve } from "path";
 
