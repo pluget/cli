@@ -23,5 +23,5 @@ export default async function add(pluginNameAndVersion: string) {
   debug(selectedVersion);
 
   addDependencyToPackageJson(pluginName, selectedVersion);
-  installPlugin(__dirname, pluginId, selectedVersion);
+  installPlugin(process.cwd(), pluginId, selectedVersion);
 }

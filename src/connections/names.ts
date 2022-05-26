@@ -3,7 +3,7 @@ import path from "path";
 
 export default async function name() {
   const names: { [key: string]: { spigot: number } } = await fse.readJSON(
-    path.join(__dirname, "../../repository/repository/name.json")
+    path.join(__dirname, "../../repository/name.json")
   );
   const response: {
     title: string;
