@@ -3,6 +3,7 @@ import createDebugMessages from "debug";
 import spigetVersionIdAndName from "../connections/spigetVersionIdAndName";
 import toSemVer from "../components/toSemVer";
 import promptVersion from "../components/prompts/version";
+import addDependencyToPackageJson from "../components/addDependencyToPackageJson";
 const debug = createDebugMessages("choices");
 
 export default async function add(pluginNameAndVersion: string) {
@@ -19,4 +20,6 @@ export default async function add(pluginNameAndVersion: string) {
   }
   const selectedVersion = await promptVersion(semVers, version);
   debug(selectedVersion);
+
+  addDependencyToPackageJson(pluginName, selectedVersion);
 }
