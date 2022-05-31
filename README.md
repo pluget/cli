@@ -32,10 +32,11 @@ CLI tool for setting up and maintaining Minecraft servers.
   * Upgrade server and plugin files inside package.json with `mpm upgrade`
 
 ## Repositories
-  * mpm tool - [GitHub (mbledkowski/mpm)](https://github.com/mbledkowski/mpm)
-  * data - [Github (mbledkowski/mpm_repository)](https://github.com/mbledkowski/mpm_repository)
-    * Data files licensed under Open Data Commons Open Database License v1.0 ([ODbL-1.0](https://opendatacommons.org/licenses/odbl/1.0/))
-    * Code licensed under MIT License ([MIT](https://opensource.org/licenses/MIT))
+  * mpm tool - [mpmgg/mpm (GitHub)](https://github.com/mpmgg/mpm)
+  * data - [mpmgg/repository (GitHub)](https://github.com/mpmgg/repository)
+    * Licensed under Open Data Commons Open Database License v1.0 ([ODbL-1.0](https://opendatacommons.org/licenses/odbl/1.0/))
+  * scripts - [mpmgg/scripts (GitHub)](https://github.com/mpmgg/scripts)
+    * Licensed under MIT License ([MIT](https://opensource.org/licenses/MIT))
 
 ## License (SPDX)
 
