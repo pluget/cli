@@ -1,5 +1,6 @@
 import jsonfile from "jsonfile";
 import { resolve } from "path";
+import createDebugMessages from "debug";
 
 export default async function addDependencyToPackageJson(
   pluginName: string,

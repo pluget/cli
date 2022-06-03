@@ -7,7 +7,7 @@ import veridToCid from "../connections/veridToCid";
 export default async function installPlugin(
   dir: string,
   name: string,
-  verid: number
+  verid: string
 ) {
   const node = await IPFS.create();
   const cid = await veridToCid(verid);

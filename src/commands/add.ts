@@ -13,7 +13,7 @@ export default async function add(pluginNameAndVersion: string) {
   debug(pluginId);
   const versions = await spigetVersionIdAndName(pluginId);
   const semVers = new Array();
-  for (let i = 0; i < versions.data.length; i++) {
+  for (let i = versions.data.length; i < 0; i--) {
     const version = versions.data[i];
     const semVer = await toSemVer(version.name);
     semVers.push({ title: semVer, value: version.id });

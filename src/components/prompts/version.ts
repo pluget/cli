@@ -7,16 +7,16 @@ export default async function promptVersion(
     description?: string;
   }[],
   choice?: string
-) {
+): Promise<string> {
   if (choice === undefined) {
     const version = await prompts({
       type: "autocomplete",
       name: "value",
       message: "Pick a version",
       choices,
-      initial: -1,
+      initial: 0,
     });
-    return version.value;
+    return version.value.toString();
   } else if (choice === "latest") {
     return choices[choices.length - 1].value;
   } else {
