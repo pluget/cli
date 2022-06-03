@@ -10,11 +10,12 @@ const debug = createDebugMessages("choices");
 export default async function add(pluginNameAndVersion: string) {
   const [pluginName, version] = pluginNameAndVersion.split("@");
   const pluginId = await promptPluginSearch(pluginName);
-  debug(pluginId);
+  debug(pluginId, typeof pluginId);
   const versions = await spigetVersionIdAndName(pluginId);
   const semVers = new Array();
-  for (let i = versions.data.length; i < 0; i--) {
-    const version = versions.data[i];
+  for (let i = versions.length - 1; i >= 0; i--) {
+    const version = versions[i];
+    debug(version);
     const semVer = await toSemVer(version.name);
     semVers.push({ title: semVer, value: version.id });
     debug(version.name, semVer, version.id);
