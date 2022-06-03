@@ -2,9 +2,9 @@ import fse from "fs-extra";
 import { join, resolve } from "path";
 import createDebugMessages from "debug";
 const debug = createDebugMessages("choices");
-import name from "../components/prompts/name";
-import version from "../components/prompts/version";
-import server from "../components/prompts/server";
+import promptName from "../components/prompts/name";
+import promptVersion from "../components/prompts/version";
+import promptServer from "../components/prompts/server";
 import createServer from "../components/createServer";
 import versions from "../components/versions";
 
@@ -18,7 +18,7 @@ export default async function init(path: string): Promise<void> {
     throw new Error(`The directory ${parentDir} does not exist.`);
   }
 
-  const serverName = await name();
+  const serverName = await promptName();
 
   const dir = join(parentDir, serverName.value);
 
@@ -28,9 +28,9 @@ export default async function init(path: string): Promise<void> {
     }
   });
 
-  const selectedVersion = await version(await availableVersions);
+  const selectedVersion = await promptVersion(await availableVersions);
   debug(selectedVersion);
-  const serverTypeAndDownload = await server(selectedVersion);
+  const serverTypeAndDownload = await promptServer(selectedVersion);
   debug(serverTypeAndDownload.val);
   debug(serverTypeAndDownload.download || "");
 

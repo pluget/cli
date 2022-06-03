@@ -1,4 +1,4 @@
-import pluginSearch from "../components/prompts/plugins";
+import promptPluginSearch from "../components/prompts/plugins";
 import createDebugMessages from "debug";
 import spigetVersionIdAndName from "../connections/spigetVersionIdAndName";
 import toSemVer from "../components/toSemVer";
@@ -9,7 +9,7 @@ const debug = createDebugMessages("choices");
 
 export default async function add(pluginNameAndVersion: string) {
   const [pluginName, version] = pluginNameAndVersion.split("@");
-  const pluginId = await pluginSearch(pluginName);
+  const pluginId = await promptPluginSearch(pluginName);
   debug(pluginId);
   const versions = await spigetVersionIdAndName(pluginId);
   const semVers = new Array();

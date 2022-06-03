@@ -1,7 +1,7 @@
 import prompts from "prompts";
 import pluginsNames from "../../connections/names";
 
-export default async function pluginSearch(pluginName?: string) {
+export default async function promptPluginSearch(pluginName?: string) {
   const choices = await pluginsNames();
   if (pluginName === "" || pluginName === undefined) {
     const response = await prompts({

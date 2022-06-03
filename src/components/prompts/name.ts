@@ -1,10 +1,10 @@
-import prompts from 'prompts';
+import prompts from "prompts";
 
-export default function name() {
+export default function promptName() {
   return prompts({
-    type: 'text',
-    name: 'value',
-    message: 'What is the name of your server?',
-    initial: 'my-mpm-server',
+    type: "text",
+    name: "value",
+    message: "What is the name of your server?",
+    initial: "my-mpm-server",
   });
-};
+}

@@ -6,7 +6,7 @@ import {
 } from "../../connections/getbukkit";
 import { getDownloadUrl as vanillaGetDownloadUrl } from "../../connections/mojang";
 
-export default async function serverType(
+export default async function promptServerType(
   version: string
 ): Promise<{ val: string; download: string | null }> {
   const [paperDownload, spigotDownload, bukkitDownload, vanillaDownload] =
