@@ -11,7 +11,7 @@ export default async function createServer(
   projectName: string,
   downloadPath: string,
   serverVersionType: string,
-  serverVersion: string
+  serverVersion: number
 ) {
   const parentDir = resolve(process.cwd(), path);
   const dir = join(parentDir, projectName);
@@ -66,7 +66,7 @@ export default async function createServer(
   await Promise.all([
     createPackageJson(dir, projectName, "0.1.0", serverVersionType, {
       name: serverVersionType,
-      version: serverVersion,
+      version: serverVersion.toString(),
     }),
     fse.copy(resolve(__dirname, "../../resources/templates/createServer"), dir),
     fse.ensureDir(resolve(dir, "./logs/logs")),

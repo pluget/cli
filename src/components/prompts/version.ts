@@ -3,11 +3,11 @@ import prompts from "prompts";
 export default async function promptVersion(
   choices: {
     title: string;
-    value: string;
+    value: number;
     description?: string;
   }[],
   choice?: string
-): Promise<string> {
+): Promise<number> {
   if (choice === undefined) {
     const version = await prompts({
       type: "autocomplete",
@@ -16,7 +16,7 @@ export default async function promptVersion(
       choices,
       initial: 0,
     });
-    return version.value.toString();
+    return version.value;
   } else if (choice === "latest") {
     return choices[choices.length - 1].value;
   } else {

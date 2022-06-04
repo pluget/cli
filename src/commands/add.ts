@@ -23,6 +23,9 @@ export default async function add(pluginNameAndVersion: string) {
   const selectedVersion = await promptVersion(semVers, version);
   debug(selectedVersion);
 
-  addDependencyToPackageJson(pluginName, selectedVersion);
+  addDependencyToPackageJson(
+    pluginName,
+    semVers.filter((e) => selectedVersion === e.value)[0].title
+  );
   installPlugin(process.cwd(), pluginId, selectedVersion);
 }

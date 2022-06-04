@@ -7,14 +7,14 @@ import {
 import { getDownloadUrl as vanillaGetDownloadUrl } from "../../connections/mojang";
 
 export default async function promptServerType(
-  version: string
+  version: number
 ): Promise<{ val: string; download: string | null }> {
   const [paperDownload, spigotDownload, bukkitDownload, vanillaDownload] =
     await Promise.all([
-      paperGetDownloadUrl(version),
-      spigotGetDownloadUrl(version),
-      bukkitGetDownloadUrl(version),
-      vanillaGetDownloadUrl(version),
+      paperGetDownloadUrl(version.toString()),
+      spigotGetDownloadUrl(version.toString()),
+      bukkitGetDownloadUrl(version.toString()),
+      vanillaGetDownloadUrl(version.toString()),
     ]);
   const selectedServer = await prompts({
     type: "select",

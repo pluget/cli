@@ -49,6 +49,7 @@
     "jsonfile": "^6.1.0",
     "loglevel": "^1.8.0",
     "minimist": "^1.2.6",
+    "progress": "^2.0.3",
     "prompts": "^2.4.2"
   }
 }

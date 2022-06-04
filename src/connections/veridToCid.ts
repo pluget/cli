@@ -1,8 +1,8 @@
 import fse from "fs-extra";
 import path from "path";
 
-export default async function veridToCid(verid: string) {
-  const verids: { [key: string]: string } = await fse.readJSON(
+export default async function veridToCid(verid: number) {
+  const verids: { [key: number]: string } = await fse.readJSON(
     path.resolve(__dirname, "../../repository/verid.json")
   );
   return verids[verid];
