@@ -2,14 +2,14 @@
 
 import minimist from "minimist";
 const args = minimist(process.argv.slice(2));
-import log from "loglevel";
+// import log from "loglevel";
 
 import init from "./commands/init";
 import help from "./commands/help";
 import add from "./commands/add";
 
 function caughtError(err: Error): void {
-  log.error(err);
+  // log.error(err);
   process.exit(1);
 }
 

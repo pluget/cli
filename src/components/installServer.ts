@@ -1,9 +1,11 @@
 import fse from "fs-extra";
 import { join, resolve } from "path";
-import downloadServer from "./downloadServer";
 
 export default async function installServer(path: string) {
-  await fse.copy(resolve(__dirname, "../../resources/templates/installServer"), path);
+  await fse.copy(
+    resolve(__dirname, "../../resources/templates/installServer"),
+    path
+  );
 
   const dirs = {} as {
     [key: string]: {
