@@ -19,10 +19,55 @@ export default async function downloadServer(
     width: 40,
     total: 100,
   });
-  bar.tick(0);
   const fetchUrl = fetch(url);
+  let [, response] = await Promise.all([ensureDirServerFolder, fetchUrl]);
 
-  const [, response] = await Promise.all([ensureDirServerFolder, fetchUrl]);
+  async function responseProgress(response: Response) {
+    const contentEncoding = response.headers.get("content-encoding");
+    const contentLength = response.headers.get(
+      contentEncoding ? "x-file-size" : "content-length"
+    );
+    if (contentLength === null) {
+      throw Error("Response size header unavailable");
+    }
+
+    const total = parseInt(contentLength, 10);
+    let loaded = 0;
+
+    return new Response(
+      new ReadableStream({
+        start(controller) {
+          if (response.body === null) {
+            return null;
+          }
+          const reader = response.body.getReader();
+
+          read();
+
+          function read() {
+            reader
+              .read()
+              .then(({ done, value }) => {
+                if (done) {
+                  controller.close();
+                  return;
+                }
+                loaded += value.byteLength;
+                bar.tick(loaded / total);
+                controller.enqueue(value);
+                read();
+              })
+              .catch((error) => {
+                console.error(error);
+                controller.error(error);
+              });
+          }
+        },
+      })
+    );
+  }
+  bar.tick(0);
+  response = await responseProgress(response);
   const file = await response.blob();
   bar.tick(100);
 
