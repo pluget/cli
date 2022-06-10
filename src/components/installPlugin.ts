@@ -8,7 +8,7 @@ export default async function installPlugin(
   dir: string,
   name: string,
   verid: number
-) {
+): Promise<void> {
   const node = await IPFS.create();
   const cid = await veridToCid(verid);
   const blob = await cidToBlob(cid, node);

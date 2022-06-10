@@ -1,12 +1,11 @@
 import jsonfile from "jsonfile";
 import { resolve } from "path";
-import createDebugMessages from "debug";
 
 export default async function addDependencyToPackageJson(
   pluginName: string,
   pluginVersion: string,
   path?: string
-) {
+): Promise<void> {
   if (path === undefined) {
     path = process.cwd();
   }

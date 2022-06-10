@@ -1,6 +1,6 @@
 import { homedir } from "os";
 import { resolve } from "path";
-import fse, { ensureDir } from "fs-extra";
+import fse from "fs-extra";
 import ProgressBar from "progress";
 import createDebugMessages from "debug";
 const debug = createDebugMessages("debugging");
@@ -13,7 +13,7 @@ export default async function downloadServer(
   const serverFolder = resolve(cacheFolder, "./server");
   const ensureDirServerFolder = fse.ensureDir(serverFolder);
 
-  var bar = new ProgressBar("[:bar] :percent :etas", {
+  const bar = new ProgressBar("[:bar] :percent :etas", {
     complete: "=",
     incomplete: " ",
     width: 40,
@@ -42,26 +42,23 @@ export default async function downloadServer(
           }
           const reader = response.body.getReader();
 
-          read();
-
-          function read() {
-            reader
-              .read()
-              .then(({ done, value }) => {
-                if (done) {
-                  controller.close();
-                  return;
-                }
-                loaded += value.byteLength;
-                bar.tick(loaded / total);
-                controller.enqueue(value);
-                read();
-              })
-              .catch((error) => {
-                console.error(error);
-                controller.error(error);
-              });
+          async function read() {
+            try {
+              const read = await reader.read()
+              if (read.done) {
+                controller.close();
+                return;
+              }
+              loaded += read.value.byteLength;
+              bar.tick(loaded / total);
+              controller.enqueue(read.value);
+            } catch (err) {
+              controller.error(err);
+            };
+            read();
           }
+
+          Promise.all([read()]);
         },
       })
     );

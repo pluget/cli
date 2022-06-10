@@ -1,10 +1,10 @@
-import { CID, IPFS } from "ipfs-core";
+import { IPFS } from "ipfs-core";
 import createDebugMessages from "debug";
 const debug = createDebugMessages("debugging");
 
 export default async function cidToBlob(cid: string, node: IPFS) {
   if (cid === null) {
-    throw new Error(`Invalid CID: ${cid}`);
+    throw new Error("Invalid CID");
   }
 
   const stream = node.cat(cid);
