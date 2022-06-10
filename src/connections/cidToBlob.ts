@@ -9,7 +9,7 @@ export default async function cidToBlob(cid: string, node: IPFS) {
 
   const stream = node.cat(cid);
 
-  const bufferArr: Uint8Array[] = new Array();
+  const bufferArr: Uint8Array[] = [];
   for await (const chunk of stream) {
     bufferArr.push(chunk);
   }
