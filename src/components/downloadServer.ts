@@ -52,13 +52,22 @@ export default async function downloadServer(
               loaded += value.byteLength;
               bar.tick(loaded / total);
               controller.enqueue(value);
-              read();
+              try {
+                read();
+              } catch (err) {
+                throw err;
+              }
             } catch (err) {
               controller.error(err);
+              throw err;
             };
           }
 
-          Promise.all([read()]);
+          try {
+            Promise.all([read()]);
+          } catch (err) {
+            throw err;
+          }
         },
       })
     );
