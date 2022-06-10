@@ -42,20 +42,20 @@ export default async function downloadServer(
           }
           const reader = response.body.getReader();
 
-          async function read() {
+          async function read(): Promise<void> {
             try {
-              const read = await reader.read()
-              if (read.done) {
+              const { done, value } = await reader.read()
+              if (done) {
                 controller.close();
                 return;
               }
-              loaded += read.value.byteLength;
+              loaded += value.byteLength;
               bar.tick(loaded / total);
-              controller.enqueue(read.value);
+              controller.enqueue(value);
+              read();
             } catch (err) {
               controller.error(err);
             };
-            read();
           }
 
           Promise.all([read()]);
