@@ -8,7 +8,7 @@ export default async function name() {
   const response: {
     title: string;
     value: number;
-  }[] = new Array();
+  }[] = [];
   for (const name in names) {
     response.push({
       title: name,

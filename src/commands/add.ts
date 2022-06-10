@@ -12,7 +12,7 @@ export default async function add(pluginNameAndVersion: string) {
   const pluginId = await promptPluginSearch(pluginName);
   debug(pluginId, typeof pluginId);
   const versions = await spigetVersionIdAndName(pluginId);
-  const semVers = new Array();
+  const semVers = [];
   for (let i = versions.length - 1; i >= 0; i--) {
     const version = versions[i];
     debug(version);
