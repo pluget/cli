@@ -84,7 +84,7 @@ export default async function downloadServer(
   }
   await removeExistingServerFromCache();
   debug(2);
-  const writeFile = await fse.appendFile(filePath, file);
+  const writeFile = await fse.appendFile(filePath, Buffer.from(await file.arrayBuffer()));
   debug(3);
 
   await writeFile;
