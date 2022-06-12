@@ -1,7 +1,7 @@
 import { homedir } from "os";
 import { resolve } from "path";
 import fse from "fs-extra";
-import ProgressBar from "progress";
+import cliProgress from "cli-progress";
 import createDebugMessages from "debug";
 const debug = createDebugMessages("debugging");
 
@@ -13,12 +13,7 @@ export default async function downloadServer(
   const serverFolder = resolve(cacheFolder, "./server");
   const ensureDirServerFolder = fse.ensureDir(serverFolder);
 
-  const bar = new ProgressBar("[:bar] :percent :etas", {
-    complete: "=",
-    incomplete: " ",
-    width: 40,
-    total: 100,
-  });
+  const bar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
   const fetchUrl = fetch(url);
   let [, response] = await Promise.all([ensureDirServerFolder, fetchUrl]);
 
@@ -50,7 +45,7 @@ export default async function downloadServer(
                 return;
               }
               loaded += value.byteLength;
-              bar.tick(loaded / total);
+              bar.update((Math.round((loaded / total) * 10000))/100);
               controller.enqueue(value);
 
               read().catch((err) => {
@@ -69,10 +64,10 @@ export default async function downloadServer(
       })
     );
   }
-  bar.tick(0);
+  bar.start(100, 0);
   response = await responseProgress(response);
   const file = await response.blob();
-  bar.tick(100);
+  bar.stop();
 
   debug(typeof file);
 
@@ -89,7 +84,7 @@ export default async function downloadServer(
   }
   await removeExistingServerFromCache();
   debug(2);
-  const writeFile = fse.appendFile(filePath, file);
+  const writeFile = await fse.appendFile(filePath, file);
   debug(3);
 
   await writeFile;
