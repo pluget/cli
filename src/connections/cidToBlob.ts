@@ -1,22 +1,16 @@
 import { IPFS } from "ipfs-core";
-import createDebugMessages from "debug";
-const debug = createDebugMessages("debugging");
 
 export default async function cidToBlob(cid: string, node: IPFS) {
   if (cid === null) {
-    throw new Error("Invalid CID");
+    throw new Error("Invalid CID (null)");
   }
 
   const stream = node.cat(cid);
 
-  const bufferArr: Uint8Array[] = [];
-  for await (const chunk of stream) {
-    bufferArr.push(chunk);
-  }
+  const arr = [];
+  for await (const i of stream) arr.push(i);
 
-  debug(bufferArr);
-
-  const blob = new Blob(bufferArr, { type: "application/octet-stream" });
+  const blob = new Blob(arr, { type: "application/octet-stream" });
 
   return blob;
 }

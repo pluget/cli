@@ -45,7 +45,7 @@ export default async function downloadServer(
                 return;
               }
               loaded += value.byteLength;
-              bar.update((Math.round((loaded / total) * 10000))/100);
+              bar.update((Math.round((loaded / total) * 10000)) / 100);
               controller.enqueue(value);
 
               read().catch((err) => {
