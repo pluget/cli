@@ -1,9 +1,8 @@
 import fse from "fs-extra";
 import path from "path";
 import * as IPFS from "ipfs-core";
-import cidToBlob from "../connections/cidToBlob";
-import veridToCid from "../connections/veridToCid";
 import createDebugMessages from "debug";
+import downloadPlugin from "./downloadPlugin";
 const debug = createDebugMessages("debugging");
 
 export default async function installPlugin(
@@ -13,10 +12,8 @@ export default async function installPlugin(
 ): Promise<void> {
   const node = await IPFS.create();
   debug("IPFS node created");
-  const cid = await veridToCid(verid);
-  debug("CID retrieved");
-  const blob = await cidToBlob(cid, node);
-  debug("Blob retrieved");
+
+  const blob = await downloadPlugin(verid, node);
 
   const modulePath = path.resolve(dir, `./modules/plugins/${name}.jar`);
   fse.writeFile(modulePath, Buffer.from(await blob.arrayBuffer()));
