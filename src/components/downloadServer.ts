@@ -10,8 +10,8 @@ export default async function downloadServer(
   name: string
 ): Promise<string> {
   const cacheFolder = resolve(homedir(), "./.cache/mpm");
-  const serverFolder = resolve(cacheFolder, "./server");
-  const ensureDirServerFolder = fse.ensureDir(serverFolder);
+  const serverCacheFolder = resolve(cacheFolder, "./server");
+  const ensureDirServerFolder = fse.ensureDir(serverCacheFolder);
 
   const bar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
   const fetchUrl = fetch(url);
@@ -39,27 +39,27 @@ export default async function downloadServer(
 
           async function read(): Promise<void> {
             try {
-              const { done, value } = await reader.read()
+              const { done, value } = await reader.read();
               if (done) {
                 controller.close();
                 return;
               }
               loaded += value.byteLength;
-              bar.update((Math.round((loaded / total) * 10000)) / 100);
+              bar.update(Math.round((loaded / total) * 10000) / 100);
               controller.enqueue(value);
 
               read().catch((err) => {
                 throw err;
-              })
+              });
             } catch (err) {
               controller.error(err);
               throw err;
-            };
+            }
           }
 
           Promise.all([read()]).catch((err) => {
             throw err;
-          })
+          });
         },
       })
     );
@@ -71,7 +71,7 @@ export default async function downloadServer(
 
   debug(typeof file);
 
-  const filePath = resolve(serverFolder, `./${name}.jar`);
+  const filePath = resolve(serverCacheFolder, `./${name}.jar`);
   debug(1);
   async function removeExistingServerFromCache() {
     try {
@@ -84,7 +84,10 @@ export default async function downloadServer(
   }
   await removeExistingServerFromCache();
   debug(2);
-  const writeFile = await fse.appendFile(filePath, Buffer.from(await file.arrayBuffer()));
+  const writeFile = await fse.appendFile(
+    filePath,
+    Buffer.from(await file.arrayBuffer())
+  );
   debug(3);
 
   await writeFile;

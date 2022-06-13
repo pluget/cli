@@ -4,7 +4,7 @@ import { join, resolve } from "path";
 import git from "isomorphic-git";
 import createPackageJson from "./createPackageJson";
 import downloadServer from "./downloadServer";
-import installServer from "./installServer";
+import initialiseServer from "./initialiseServer";
 
 export default async function createServer(
   path: string,
@@ -89,5 +89,5 @@ export default async function createServer(
     },
   });
 
-  await installServer(dir);
+  await initialiseServer(dir);
 }

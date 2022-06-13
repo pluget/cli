@@ -1,7 +1,7 @@
 import fse from "fs-extra";
 import { join, resolve } from "path";
 
-export default async function installServer(path: string) {
+export default async function initialiseServer(path: string) {
   await fse.copy(
     resolve(__dirname, "../../resources/templates/installServer"),
     path
