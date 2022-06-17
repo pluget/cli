@@ -7,7 +7,7 @@ import log from "loglevel";
 import init from "./commands/init";
 import help from "./commands/help";
 import add from "./commands/add";
-import install from "./commands/install"
+import install from "./commands/install";
 
 function caughtError(err: Error): void {
   log.error(err);
@@ -23,6 +23,7 @@ if (args._.length === 2 && args._[0] === "help") {
       break;
     case "add":
       add(args._[1] || "").catch(caughtError);
+      break;
     case "install":
       install(args._[1] || "").catch(caughtError);
       break;
