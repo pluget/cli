@@ -6,9 +6,9 @@ import downloadPlugin from "./downloadPlugin";
 const debug = createDebugMessages("debugging");
 
 export default async function installPlugin(
-  dir: string,
   name: string,
-  verid: number
+  verid: number,
+  dir: string
 ): Promise<void> {
   const node = await IPFS.create();
   debug("IPFS node created");

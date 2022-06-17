@@ -49,7 +49,7 @@ export default async function add(pluginNameAndVersion: string) {
     throw err;
   });
 
-  installPlugin(process.cwd(), pluginId, selectedVersion).catch((err) => {
+  installPlugin(pluginId, selectedVersion, process.cwd()).catch((err) => {
     throw err;
   });
 }
