@@ -1,8 +1,9 @@
 import fse from "fs-extra";
-import path from "path";
+import { resolve } from "path";
 import * as IPFS from "ipfs-core";
-import createDebugMessages from "debug";
 import downloadPlugin from "./downloadPlugin";
+import log from "loglevel";
+import createDebugMessages from "debug";
 const debug = createDebugMessages("debugging");
 
 export default async function installPlugin(
@@ -15,12 +16,24 @@ export default async function installPlugin(
 
   const blob = await downloadPlugin(verid, node);
 
-  const modulePath = path.resolve(dir, `./modules/plugins/${name}.jar`);
-  fse.writeFile(modulePath, Buffer.from(await blob.arrayBuffer()));
-  fse.symlink(
-    `../modules/plugins/${name}.jar`,
-    path.resolve(dir, `./plugins/${name}.jar`)
+  const modulesPath = resolve(dir, "./modules/plugins/");
+  const modulePath = resolve(modulesPath, `./${name}.jar`);
+  const promises: Promise<any>[] = [];
+
+  promises.push(
+    fse.ensureDir(modulesPath),
+    fse.writeFile(modulePath, Buffer.from(await blob.arrayBuffer())),
+    fse.symlink(
+      `../modules/plugins/${name}.jar`,
+      resolve(dir, `./plugins/${name}.jar`)
+    )
   );
+
+  try {
+    await Promise.all(promises);
+  } catch (e) {
+    log.warn(e);
+  }
   debug("Plugin installed");
   await node.stop();
 }

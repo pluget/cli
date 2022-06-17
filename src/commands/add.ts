@@ -1,11 +1,11 @@
 import promptPluginSearch from "../components/prompts/plugins";
-import createDebugMessages from "debug";
 import spigetVersionIdAndName from "../connections/spigetVersionIdAndName";
 import toSemVer from "../components/toSemVer";
 import promptVersion from "../components/prompts/version";
 import addDependencyToPackageJson from "../components/addDependencyToPackageJson";
 import installPlugin from "../components/installPlugin";
 import veridToCid from "../connections/veridToCid";
+import createDebugMessages from "debug";
 const debug = createDebugMessages("choices");
 
 export default async function add(pluginNameAndVersion: string) {
