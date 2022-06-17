@@ -10,7 +10,14 @@ CLI tool for setting up and maintaining Minecraft servers.
 
 ## Supported platforms
 
-  This package currently supports only UNIX and UNIX-like systems. Windows (DOS) platform is not supported, although adding support for it is planned.
+  This package currently supports only UNIX and UNIX-like systems. Windows (and DOS) platform is not supported, although adding support for it is planned.
+
+  * UNIX / UNIX-like
+    * macOS
+    * GNU/Linux
+    * BSD
+  * DOS / Windows NT
+    * adding support planned
 
 ## Installation
 
