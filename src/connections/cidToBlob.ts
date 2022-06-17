@@ -1,6 +1,6 @@
 import { IPFS } from "ipfs-core";
 
-export default async function cidToBlob(cid: string, node: IPFS) {
+export default async function cidToBlob(cid: string | null, node: IPFS) {
   if (cid === null) {
     throw new Error("Invalid CID (null)");
   }

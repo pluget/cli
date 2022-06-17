@@ -4,13 +4,14 @@ export default async function promptVersion(
   choices: {
     title: string;
     value: number;
+    disabled: boolean;
     description?: string;
   }[],
   choice?: string
 ): Promise<number> {
   if (choice === undefined) {
     const version = await prompts({
-      type: "autocomplete",
+      type: "select",
       name: "value",
       message: "Pick a version",
       choices,

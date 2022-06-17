@@ -14,31 +14,36 @@ export default async function add(pluginNameAndVersion: string) {
   debug(pluginId, typeof pluginId);
   const availableVersions = await spigetVersionIdAndName(pluginId);
   const semanticVersions = [];
-  const alreadyExistingVersions = new Map();
+
   for (let i = availableVersions.length - 1; i >= 0; i--) {
     const version = availableVersions[i];
     debug(version);
     const semVer = await toSemVer(version.name);
-    if (!alreadyExistingVersions.has(version.id)) {
-      if (veridToCid(version.id) !== undefined) {
-        if (i === availableVersions.length - 1) {
-          semanticVersions.push({
-            title: semVer,
-            value: version.id,
-            description: "latest",
-          });
-        } else {
-          semanticVersions.push({ title: semVer, value: version.id });
-        }
+    debug(version.id);
+    if ((await veridToCid(version.id)) !== null) {
+      if (i === availableVersions.length - 1) {
+        semanticVersions.push({
+          title: semVer,
+          value: version.id,
+          disabled: false,
+          description: "latest",
+        });
       } else {
         semanticVersions.push({
           title: semVer,
           value: version.id,
-          disabled: true,
+          disabled: false,
         });
       }
+    } else {
+      semanticVersions.push({
+        title: semVer,
+        value: version.id,
+        disabled: true,
+      });
     }
   }
+  debug(semanticVersions);
   const selectedVersion = await promptVersion(semanticVersions, version);
   debug(selectedVersion);
 
