@@ -18,8 +18,9 @@ CLI tool for setting up and maintaining Minecraft servers.
 
   OR
 
-  * Clone the repository to your local machine and run `npm install` or `yarn install`
-  * Instead of `mpm` type `npx start` or `yarn start`
+  * Clone the repository to your local machine
+  * Run `npm build` or `yarn build`
+  * Type `npm link` or `yarn global add file:/path/to/mpm` to install package globally
 
 ## Usage
 
