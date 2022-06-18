@@ -5,13 +5,22 @@ import promptVersion from "../components/prompts/version";
 import addDependencyToPackageJson from "../components/addDependencyToPackageJson";
 import installPlugin from "../components/installPlugin";
 import veridToCid from "../connections/veridToCid";
+import pluginNames from "../connections/names";
 import createDebugMessages from "debug";
 const debug = createDebugMessages("choices");
 
 export default async function add(pluginNameAndVersion: string) {
-  const [pluginName, version] = pluginNameAndVersion.split("@");
-  const pluginId = await promptPluginSearch(pluginName);
-  debug(pluginId, typeof pluginId);
+  let [pluginName, version] = pluginNameAndVersion.split("@");
+  const awaitedPluginNames = await pluginNames();
+  const pluginId: number = await promptPluginSearch(
+    awaitedPluginNames,
+    pluginName
+  );
+  debug(pluginId);
+  if (pluginName === "" || pluginName === undefined) {
+    pluginName =
+      awaitedPluginNames.find((e) => e.value === pluginId)?.title || "";
+  }
   const availableVersions = await spigetVersionIdAndName(pluginId);
   const semanticVersions = [];
 
@@ -54,7 +63,7 @@ export default async function add(pluginNameAndVersion: string) {
     throw err;
   });
 
-  installPlugin(pluginId, selectedVersion, process.cwd()).catch((err) => {
+  installPlugin(pluginName, selectedVersion, process.cwd()).catch((err) => {
     throw err;
   });
 }

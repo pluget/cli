@@ -5,6 +5,8 @@ import toSemVer from "../components/toSemVer";
 import names from "../connections/names";
 import spigetVersionIdAndName from "../connections/spigetVersionIdAndName";
 import packageJson from "../interfaces/packageJson";
+import createDebugMessages from "debug";
+const debug = createDebugMessages("debugging");
 
 export default async function install(path: string) {
   const dir = resolve(process.cwd(), path);
