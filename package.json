@@ -47,7 +47,7 @@
     "cli-progress": "^3.11.1",
     "debug": "^4.3.4",
     "fs-extra": "^10.1.0",
-    "ipfs-core": "^0.14.2",
+    "ipfs-core": "^0.15.0",
     "isomorphic-git": "^1.18.3",
     "jsonfile": "^6.1.0",
     "loglevel": "^1.8.0",
