@@ -34,7 +34,7 @@
     "@types/fs-extra": "9.0.13",
     "@types/jsonfile": "6.1.0",
     "@types/minimist": "1.2.2",
-    "@types/node": "18.0.0",
+    "@types/node": "18.11.9",
     "@types/progress": "2.0.5",
     "@types/prompts": "2.0.14",
     "ts-node": "10.8.2",
